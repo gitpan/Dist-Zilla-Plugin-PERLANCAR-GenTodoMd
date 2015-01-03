@@ -1,7 +1,7 @@
 package Dist::Zilla::Plugin::PERLANCAR::GenTodoMd;
 
 our $DATE = '2015-01-03'; # DATE
-our $VERSION = '0.01'; # VERSION
+our $VERSION = '0.02'; # VERSION
 
 use 5.010001;
 use autodie;
@@ -70,12 +70,16 @@ sub gather_files {
     {
         my $prev_is_hl;
         my $prev_is_verbatim;
+        my $prev_hl_has_text;
         for my $line (split /^/, $output) {
             if ($line =~ /\A(\*+) (.+)/) {
+                $output_md .= "\n" if $prev_hl_has_text;
                 $output_md .= "* $2\n";
                 $prev_is_hl++;
+                $prev_hl_has_text = 0;
                 $prev_is_verbatim = 0;
             } else {
+                $prev_hl_has_text++;
                 $output_md .= "\n" if $prev_is_hl;
                 # change verbatim ": ..." to markdown style
                 if ($line =~ s/^\s*: (.*)/    $1/) {
@@ -112,7 +116,7 @@ Dist::Zilla::Plugin::PERLANCAR::GenTodoMd - Generate TODO.md
 
 =head1 VERSION
 
-This document describes version 0.01 of Dist::Zilla::Plugin::PERLANCAR::GenTodoMd (from Perl distribution Dist-Zilla-Plugin-PERLANCAR-GenTodoMd), released on 2015-01-03.
+This document describes version 0.02 of Dist::Zilla::Plugin::PERLANCAR::GenTodoMd (from Perl distribution Dist-Zilla-Plugin-PERLANCAR-GenTodoMd), released on 2015-01-03.
 
 =head1 SYNOPSIS
 

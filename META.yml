@@ -18,16 +18,17 @@ meta-spec:
   version: '1.4'
 name: Dist-Zilla-Plugin-PERLANCAR-GenTodoMd
 requires:
+  App::OrgUtils: '0.23'
   Dist::Zilla: '0'
   IPC::System::Simple: '0'
 resources:
   bugtracker: https://rt.cpan.org/Public/Dist/Display.html?Name=Dist-Zilla-Plugin-PERLANCAR-GenTodoMd
   homepage: https://metacpan.org/release/Dist-Zilla-Plugin-PERLANCAR-GenTodoMd
   repository: git://github.com/perlancar/perl-Dist-Zilla-Plugin-PERLANCAR-GenTodoMd.git
-version: '0.01'
+version: '0.02'
 x_Dist_Zilla:
   perl:
-    version: '5.018002'
+    version: '5.018001'
   plugins:
     -
       class: Dist::Zilla::Plugin::GatherDir
@@ -246,7 +247,7 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::Rinci::Validate
       name: '@Author::PERLANCAR/Rinci::Validate'
-      version: '0.19'
+      version: '0.20'
     -
       class: Dist::Zilla::Plugin::SetScriptShebang
       name: '@Author::PERLANCAR/SetScriptShebang'
@@ -275,6 +276,10 @@ x_Dist_Zilla:
     -
       class: Dist::Zilla::Plugin::Test::Rinci
       name: '@Author::PERLANCAR/Test::Rinci'
+      version: '0.01'
+    -
+      class: Dist::Zilla::Plugin::PERLANCAR::GenTodoMd
+      name: '@Author::PERLANCAR/PERLANCAR::GenTodoMd'
       version: '0.01'
     -
       class: Dist::Zilla::Plugin::Prereqs

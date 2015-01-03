@@ -21,6 +21,7 @@ my %WriteMakefileArgs = (
   "LICENSE" => "perl",
   "NAME" => "Dist::Zilla::Plugin::PERLANCAR::GenTodoMd",
   "PREREQ_PM" => {
+    "App::OrgUtils" => "0.23",
     "Dist::Zilla" => 0,
     "IPC::System::Simple" => 0
   },
@@ -30,7 +31,7 @@ my %WriteMakefileArgs = (
     "IPC::Open3" => 0,
     "Test::More" => 0
   },
-  "VERSION" => "0.01",
+  "VERSION" => "0.02",
   "test" => {
     "TESTS" => "t/*.t"
   }
@@ -38,6 +39,7 @@ my %WriteMakefileArgs = (
 
 
 my %FallbackPrereqs = (
+  "App::OrgUtils" => "0.23",
   "Dist::Zilla" => 0,
   "ExtUtils::MakeMaker" => 0,
   "File::Spec" => 0,
