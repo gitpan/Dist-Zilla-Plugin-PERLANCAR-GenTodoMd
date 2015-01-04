@@ -1,7 +1,7 @@
 package Dist::Zilla::Plugin::PERLANCAR::GenTodoMd;
 
-our $DATE = '2015-01-03'; # DATE
-our $VERSION = '0.02'; # VERSION
+our $DATE = '2015-01-04'; # DATE
+our $VERSION = '0.03'; # VERSION
 
 use 5.010001;
 use autodie;
@@ -67,6 +67,7 @@ sub gather_files {
 
     # quick hack to convert to markdown
     my $output_md = '';
+    my $num_hls = 0;
     {
         my $prev_is_hl;
         my $prev_is_verbatim;
@@ -75,6 +76,7 @@ sub gather_files {
             if ($line =~ /\A(\*+) (.+)/) {
                 $output_md .= "\n" if $prev_hl_has_text;
                 $output_md .= "* $2\n";
+                $num_hls++;
                 $prev_is_hl++;
                 $prev_hl_has_text = 0;
                 $prev_is_verbatim = 0;
@@ -93,6 +95,12 @@ sub gather_files {
                 $prev_is_hl = 0;
             }
         }
+    }
+
+    # just an arbitrary sanity check that prevents a mistake of e.g. exporting
+    # my whole proj/perl entries, or even worse my whole todo.org entries
+    if ($num_hls > 300) {
+        die "There might be something wrong, there are > 300 todo entries";
     }
 
     my $todo_md = Dist::Zilla::File::InMemory->new(
@@ -116,7 +124,7 @@ Dist::Zilla::Plugin::PERLANCAR::GenTodoMd - Generate TODO.md
 
 =head1 VERSION
 
-This document describes version 0.02 of Dist::Zilla::Plugin::PERLANCAR::GenTodoMd (from Perl distribution Dist-Zilla-Plugin-PERLANCAR-GenTodoMd), released on 2015-01-03.
+This document describes version 0.03 of Dist::Zilla::Plugin::PERLANCAR::GenTodoMd (from Perl distribution Dist-Zilla-Plugin-PERLANCAR-GenTodoMd), released on 2015-01-04.
 
 =head1 SYNOPSIS
 
